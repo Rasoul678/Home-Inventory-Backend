@@ -7,5 +7,6 @@ module.exports = {
     location: 'location',
     address: 'address',
     manufacturer: 'manufacturer',
+    size: 'size',
     item: 'item',
 };

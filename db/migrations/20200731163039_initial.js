@@ -1,35 +1,12 @@
 const Knex = require("knex");
 const tableNames = require("../../src/constants/tableNames");
-
-function addDefaultColumns(table) {
-  table.timestamps(false, true);
-  table.datetime("deleted_at");
-}
-
-function createNameTable(knex, table_name) {
-  return knex.schema.createTable(table_name, (table) => {
-    table.increments().notNullable();
-    table.string("name").notNullable().unique();
-    addDefaultColumns(table);
-  });
-}
-
-function references(table, tableName){
-    table
-    .integer(`${tableName}_id`)
-    .unsigned()
-    .references('id')
-    .inTable(tableName)
-    .onDelete('cascade');
-}
-
-function url(table, columnName){
-    table.string(columnName, 2000);
-}
-
-function email(table, columnName){
-    return table.string(columnName, 254);
-}
+const {
+      addDefaultColumns,
+      createNameTable,
+      references,
+      url,
+      email
+  } = require("../../src/libs/tableUtils");
 
 /**
  * @param {Knex} knex
@@ -64,8 +41,8 @@ exports.up = async (knex) => {
 
   await knex.schema.createTable(tableNames.address, (table) => {
     table.increments().notNullable();
-    references(table, 'state');
-    references(table, 'country');
+    references(table, tableNames.state);
+    references(table, tableNames.country);
     table.string("street_address_1", 50).notNullable();
     table.string("street_address_2", 50);
     table.string("city", 50).notNullable();
