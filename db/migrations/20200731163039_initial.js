@@ -41,7 +41,7 @@ exports.up = async (knex) => {
 
   await knex.schema.createTable(tableNames.address, (table) => {
     table.increments().notNullable();
-    references(table, tableNames.state);
+    references(table, tableNames.state, false);
     references(table, tableNames.country);
     table.string("street_address_1", 50).notNullable();
     table.string("street_address_2", 50);

@@ -11,13 +11,18 @@ function addDefaultColumns(table) {
     });
   }
   
-  function references(table, tableName){
-      table
-      .integer(`${tableName}_id`)
-      .unsigned()
-      .references('id')
-      .inTable(tableName)
-      .onDelete('cascade');
+  function references(table, tableName, notNullable = true){
+      const definition = table.integer(`${tableName}_id`)
+        .unsigned()
+        .references('id')
+        .inTable(tableName)
+        .onDelete('cascade');
+
+        if(notNullable){
+          definition.notNullable();
+        }
+
+        
   }
   
   function url(table, columnName){
