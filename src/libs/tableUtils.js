@@ -11,8 +11,8 @@ function addDefaultColumns(table) {
     });
   }
   
-  function references(table, tableName, notNullable = true){
-      const definition = table.integer(`${tableName}_id`)
+  function references(table, tableName, notNullable = true, columnName = ''){
+      const definition = table.integer(`${columnName || tableName}_id`)
         .unsigned()
         .references('id')
         .inTable(tableName)
@@ -22,7 +22,7 @@ function addDefaultColumns(table) {
           definition.notNullable();
         }
 
-        
+        return definition;
   }
   
   function url(table, columnName){

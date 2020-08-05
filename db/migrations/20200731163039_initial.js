@@ -22,7 +22,7 @@ exports.up = async (knex) => {
       addDefaultColumns(table);
     }),
 
-    knex.schema.createTable(tableNames.location, (table) => {
+    knex.schema.createTable(tableNames.inventory_location, (table) => {
         table.increments().notNullable();
         table.string("name").notNullable().unique();
         table.string("description", 1000);
@@ -52,11 +52,12 @@ exports.up = async (knex) => {
     addDefaultColumns(table);
   });
 
-  await knex.schema.createTable(tableNames.manufacturer, (table) => {
+  await knex.schema.createTable(tableNames.company, (table) => {
     table.increments().notNullable();
-    references(table, 'address');
+    references(table, tableNames.address);
     table.string("name").notNullable();
     table.string("description", 1000);
+    table.string('type').notNullable();
     email(table, 'email');
     url(table, 'logo_url');
     url(table, 'website_url');
@@ -66,13 +67,13 @@ exports.up = async (knex) => {
 
 exports.down = async (knex) => {
     await Promise.all([
-        tableNames.manufacturer,
+        tableNames.company,
         tableNames.address,
         tableNames.user,
         tableNames.item_type,
         tableNames.state,
         tableNames.country,
         tableNames.shape,
-        tableNames.location
-    ].map((tableName)=>knex.schema.dropTable(tableName)));
+        tableNames.inventory_location
+    ].map((tableName)=>knex.schema.dropTableIfExists(tableName)));
 };
