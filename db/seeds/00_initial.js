@@ -25,15 +25,19 @@ const password = crypto.randomBytes(15).toString('hex');
 
   const [createdUser] = await knex(tableNames.user).insert(user).returning('*');
 
-  console.log(`Password: ${password}`);
-  console.log(createdUser);
+  if(process.env.NODE_ENV !== 'test'){
+    console.log(`Password: ${password}`);
+    console.log(createdUser);
+  }
 
   const states = [
-    {name: 'CO'}
+    {name: 'Colorado', code: 'CO', 'country_id': 1},
+    {name: 'Arizona', code: 'AZ', 'country_id': 1},
+    {name: 'Texas', code: 'TX', 'country_id': 1},
   ];
 
-  await knex(tableNames.state).insert(states);
-
   await knex(tableNames.country).insert(countries);
+
+  await knex(tableNames.state).insert(states);
 
 };

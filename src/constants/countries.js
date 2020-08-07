@@ -1,5 +1,5 @@
 module.exports = [
-    {name: 'US'},
-    {name: 'IR'},
-    {name: 'UK'}
+    {name: 'United States', code: 'US'},
+    {name: 'Iran', code: 'IR'},
+    {name: 'United kingdom', code: 'UK'}
   ];

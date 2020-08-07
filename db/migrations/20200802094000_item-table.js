@@ -13,6 +13,7 @@ const {
  */
 exports.up = async (knex) => {
     await knex.schema.table(tableNames.state, (table)=>{
+        references(table, tableNames.country);
         table.string('code');
     });
 
@@ -79,6 +80,7 @@ exports.up = async (knex) => {
 exports.down = async (knex) => {
 
     await knex.schema.table(tableNames.state, (table)=>{
+        table.dropForeign('country_id');
         table.dropColumn('code');
     });
 
