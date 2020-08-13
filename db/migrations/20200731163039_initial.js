@@ -19,6 +19,7 @@ exports.up = async (knex) => {
       email(table, 'email').notNullable().unique();
       table.string("password", 127).notNullable();
       table.dateTime("last_login");
+      table.string("role").defaultTo("user");
       addDefaultColumns(table);
     }),
 
@@ -45,10 +46,11 @@ exports.up = async (knex) => {
     table.string("street_address_1", 50).notNullable();
     table.string("street_address_2", 50);
     table.string("city", 50).notNullable();
-    table.string("zipcode", 15).notNullable();
-    table.float("latitude").notNullable();
-    table.float("longitude").notNullable();
+    table.string("zipcode", 10).notNullable();
+    table.double("latitude").notNullable();
+    table.double("longitude").notNullable();
     addDefaultColumns(table);
+    table.unique(['state_id','street_address_1','street_address_2','city','zipcode']);
   });
 
   await knex.schema.createTable(tableNames.company, (table) => {
@@ -61,6 +63,7 @@ exports.up = async (knex) => {
     url(table, 'logo_url');
     url(table, 'website_url');
     addDefaultColumns(table);
+    table.unique(['name', 'type', 'email', 'description', 'address_id']);
   });
 };
 

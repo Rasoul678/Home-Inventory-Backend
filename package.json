@@ -20,11 +20,17 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "helmet": "^4.0.0",
+    "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.2",
     "morgan": "^1.10.0",
     "objection": "^2.2.2",
+    "objection-dynamic-finder": "^0.1.4",
+    "objection-soft-delete": "^1.0.7",
+    "objection-unique": "^1.2.1",
+    "objection-visibility": "^1.1.0",
     "pg": "^8.3.0",
+    "redis": "^3.0.2",
     "yup": "^0.29.3"
   },
   "devDependencies": {

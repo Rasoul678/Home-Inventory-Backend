@@ -5,10 +5,11 @@ const helmet = require('helmet');
 const middlewares = require('./middlewares');
 const project = require('./constants/project');
 const api = require('./api');
+require('./libs/init_redis');
 
 const app = express();
 
-app.use(morgan('tiny'));
+app.use(morgan('dev'));
 app.use(compression());
 app.use(helmet());
 app.use(express.json()); // For json request like axios.

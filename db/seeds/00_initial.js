@@ -21,6 +21,7 @@ const password = crypto.randomBytes(15).toString('hex');
     name: 'Rasoul',
     email: 'rasoul@gmail.com',
     password: await bcrypt.hash(password, 12),
+    role: 'admin'
   };
 
   const [createdUser] = await knex(tableNames.user).insert(user).returning('*');
@@ -36,8 +37,20 @@ const password = crypto.randomBytes(15).toString('hex');
     {name: 'Texas', code: 'TX', 'country_id': 1},
   ];
 
+  const shapes = [
+    {name: 'triangle', description: 'triangle'},
+    {name: 'square', description: 'square'},
+    {name: 'pentagon', description: 'pentagon'},
+    {name: 'circle', description: 'circle'},
+    {name: 'oval', description: 'oval'},
+    {name: 'cube', description: 'cube'},
+    {name: 'cylinder', description: 'cylinder'},
+  ]
+
   await knex(tableNames.country).insert(countries);
 
   await knex(tableNames.state).insert(states);
+
+  await knex(tableNames.shape).insert(shapes);
 
 };

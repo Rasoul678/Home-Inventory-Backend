@@ -21,6 +21,10 @@ exports.up = async (knex) => {
         table.string('code');
     });
 
+    await knex.schema.table(tableNames.shape, (table)=>{
+        table.string('description');
+    });
+
     await knex.schema.createTable(tableNames.size, (table)=>{
         table.increments().notNullable();
         references(table, tableNames.shape);
@@ -86,6 +90,10 @@ exports.down = async (knex) => {
 
     await knex.schema.table(tableNames.country, (table)=>{
         table.dropColumn('code');
+    });
+
+    await knex.schema.table(tableNames.shape, (table)=>{
+        table.dropColumn('description');
     });
 
     await Promise.all([

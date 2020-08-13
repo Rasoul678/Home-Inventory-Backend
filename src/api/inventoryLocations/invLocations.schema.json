@@ -1,44 +1,31 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
-    "title": "User",
-    "description": "The User",
+    "title": "InventoryLocation",
+    "description": "The InventoryLocation",
     "required": [
-        "name",
-        "email",
-        "password"
+        "name"
     ],
     "properties": {
         "id": {
             "$id": "#/properties/id",
             "type": "integer",
-            "title": "The database Id of the user"
+            "title": "The database Id of the inventory location"
         },
         "name": {
             "$id": "#/properties/name",
             "type": "string",
-            "title": "The users name ",
-            "examples": [
-                "username"
-            ]
+            "title": "The name of the inventory location"
         },
-        "email": {
-            "$id": "#/properties/email",
+        "description": {
+            "$id": "#/properties/description",
             "type": "string",
-            "title": "The users email. Must be unique.",
-            "examples": [
-                "user@gmail.com"
-            ]
+            "title": "The description of the inventory location"
         },
-        "password": {
-            "$id": "#/properties/password",
+        "image_url": {
+            "$id": "#/properties/image_url",
             "type": "string",
-            "title": "The users hashed password."
-        },
-        "role": {
-            "$id": "#/properties/role",
-            "type": "string",
-            "title": "The users role."
+            "title": "The url of the image of the inventory location"
         },
         "created_at": {
             "$id": "#/properties/created_at",

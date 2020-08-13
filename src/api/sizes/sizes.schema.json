@@ -1,44 +1,47 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
-    "title": "User",
-    "description": "The User",
+    "title": "Size",
+    "description": "The Size",
     "required": [
         "name",
-        "email",
-        "password"
+        "shape_id"
     ],
     "properties": {
         "id": {
             "$id": "#/properties/id",
             "type": "integer",
-            "title": "The database Id of the user"
+            "title": "The database Id of the size"
+        },
+        "shape_id": {
+            "$id": "#/properties/shape_id",
+            "type": "integer",
+            "title": "The database Id of the shape"
         },
         "name": {
             "$id": "#/properties/name",
             "type": "string",
-            "title": "The users name ",
-            "examples": [
-                "username"
-            ]
+            "title": "The name of the size"
         },
-        "email": {
-            "$id": "#/properties/email",
+        "length": {
+            "$id": "#/properties/length",
             "type": "string",
-            "title": "The users email. Must be unique.",
-            "examples": [
-                "user@gmail.com"
-            ]
+            "title": "The length of the item"
         },
-        "password": {
-            "$id": "#/properties/password",
+        "width": {
+            "$id": "#/properties/width",
             "type": "string",
-            "title": "The users hashed password."
+            "title": "The width of the item"
         },
-        "role": {
-            "$id": "#/properties/role",
+        "height": {
+            "$id": "#/properties/height",
             "type": "string",
-            "title": "The users role."
+            "title": "The height of the item"
+        },
+        "volume": {
+            "$id": "#/properties/volume",
+            "type": "string",
+            "title": "The volume of the item"
         },
         "created_at": {
             "$id": "#/properties/created_at",

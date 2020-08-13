@@ -1,44 +1,53 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
-    "title": "User",
-    "description": "The User",
+    "title": "Company",
+    "description": "The Company",
     "required": [
+        "address_id",
         "name",
-        "email",
-        "password"
+        "type"
     ],
     "properties": {
         "id": {
             "$id": "#/properties/id",
             "type": "integer",
-            "title": "The database Id of the user"
+            "title": "The database Id of the company"
+        },
+        "address_id": {
+            "$id": "#/properties/address_id",
+            "type": "integer",
+            "title": "The id of the address"
         },
         "name": {
             "$id": "#/properties/name",
             "type": "string",
-            "title": "The users name ",
-            "examples": [
-                "username"
-            ]
+            "title": "The name of the company"
+        },
+        "description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "The description of the company"
+        },
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "The type of the company"
         },
         "email": {
             "$id": "#/properties/email",
             "type": "string",
-            "title": "The users email. Must be unique.",
-            "examples": [
-                "user@gmail.com"
-            ]
+            "title": "The email of the company"
         },
-        "password": {
-            "$id": "#/properties/password",
+        "logo_url": {
+            "$id": "#/properties/logo_url",
             "type": "string",
-            "title": "The users hashed password."
+            "title": "The logo url of the company"
         },
-        "role": {
-            "$id": "#/properties/role",
+        "website_url": {
+            "$id": "#/properties/website_url",
             "type": "string",
-            "title": "The users role."
+            "title": "The website url of the company"
         },
         "created_at": {
             "$id": "#/properties/created_at",

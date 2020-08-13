@@ -1,44 +1,26 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "type": "object",
-    "title": "User",
-    "description": "The User",
+    "title": "Shape",
+    "description": "The Shape",
     "required": [
-        "name",
-        "email",
-        "password"
+        "name"
     ],
     "properties": {
         "id": {
             "$id": "#/properties/id",
             "type": "integer",
-            "title": "The database Id of the user"
+            "title": "The database Id of the shape"
         },
         "name": {
             "$id": "#/properties/name",
             "type": "string",
-            "title": "The users name ",
-            "examples": [
-                "username"
-            ]
+            "title": "The name of the shape"
         },
-        "email": {
-            "$id": "#/properties/email",
+        "description": {
+            "$id": "#/properties/description",
             "type": "string",
-            "title": "The users email. Must be unique.",
-            "examples": [
-                "user@gmail.com"
-            ]
-        },
-        "password": {
-            "$id": "#/properties/password",
-            "type": "string",
-            "title": "The users hashed password."
-        },
-        "role": {
-            "$id": "#/properties/role",
-            "type": "string",
-            "title": "The users role."
+            "title": "The description of the shape"
         },
         "created_at": {
             "$id": "#/properties/created_at",

@@ -1,16 +1,13 @@
 const express = require('express');
-const State = require('./states.model');
+const Country = require('./countries.model');
 const middlewares = require('../../middlewares');
 
 const router = express.Router();
 
 router.get('/', middlewares.authenticateJWT, async (req, res, next) => {
   try {
-    const states = await State.query()
-      .finder.deletedAt(false)
-      .withGraphFetched('addresses')
-      .withGraphFetched('country');
-    res.json(states);
+    const countries = await Country.query().finder.deletedAt(false).withGraphFetched('states');
+    res.json(countries);
   } catch (error) {
     next(error);
   }
@@ -19,12 +16,9 @@ router.get('/', middlewares.authenticateJWT, async (req, res, next) => {
 router.get('/:id', middlewares.authenticateJWT, async (req, res, next) => {
   const { id } = req.params;
   try {
-    const state = await State.query()
-      .findById(parseInt(id) || 0)
-      .withGraphFetched('addresses')
-      .withGraphFetched('country');
-      if (state) {
-        return res.json(state);
+    const country = await Country.query().findById(parseInt(id) || 0).withGraphFetched('states');
+      if (country) {
+        return res.json(country);
       }
       return next();
   } catch (error) {

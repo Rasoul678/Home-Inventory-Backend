@@ -1,0 +1,21 @@
+GET http://localhost:4030
+
+###
+GET http://localhost:4030/api/v1
+
+###Signup
+POST http://localhost:4030/api/v1/auth/signup
+
+Content-Type: application/json
+
+{
+    "name": "Rasoul",
+    "email": "rasoul@gmail.com",
+    "password": "password"
+}
+
+###Log out
+DELETE http://localhost:4030/api/v1/auth/logout
+
+###Refresh token
+POST http://localhost:4030/api/v1/auth/refresh_token

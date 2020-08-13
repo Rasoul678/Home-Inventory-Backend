@@ -1,6 +1,6 @@
 function addDefaultColumns(table) {
     table.timestamps(false, true);
-    table.datetime("deleted_at");
+    table.boolean("deleted_at").notNullable().defaultTo(false);
   }
   
   function createNameTable(knex, table_name) {
