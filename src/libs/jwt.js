@@ -6,7 +6,7 @@ const signAccessToken = (payload) => {
     return new Promise((resolve, reject) => {
         const secret = process.env.ACCESS_TOKEN_SECRET;
         const options = {
-            expiresIn: '1d',
+            expiresIn: '60000',
             issuer: 'HomeInventory.com',
             audience: payload.name
         };

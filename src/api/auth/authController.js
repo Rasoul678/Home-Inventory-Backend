@@ -3,6 +3,7 @@ const validationSchema = require('./validationSchema');
 const User = require('../users/users.model');
 const jwt = require('../../libs/jwt');
 const client = require('../../libs/init_redis');
+const Cookie = require('../../libs/Cookie');
 
 
 const errorMessages = {
@@ -45,10 +46,11 @@ const signup = async (req, res, next) => {
         const accessToken = await jwt.signAccessToken(payload);
         const refreshToken = await jwt.signRefreshToken(insertedUser.id);
 
+        Cookie.send(refreshToken, res);
+
         res.json({
             user: payload,
-            accessToken,
-            refreshToken
+            accessToken
         });
 
     } catch (error) {
@@ -94,10 +96,11 @@ const signin = async (req, res, next) => {
         const accessToken = await jwt.signAccessToken(payload);
         const refreshToken = await jwt.signRefreshToken(user.id.toString());
 
+        Cookie.send(refreshToken, res);
+
         res.json({
             user: payload,
-            accessToken,
-            refreshToken
+            accessToken
         });
 
     } catch (error) {
@@ -108,7 +111,7 @@ const signin = async (req, res, next) => {
 
 const refreshToken = async (req, res, next) => {
     try {
-        const {refreshToken} = req.body;
+        const {refreshToken} = req.cookies;
 
         if(!refreshToken){
             const error = new Error('Bad Request');
@@ -128,11 +131,12 @@ const refreshToken = async (req, res, next) => {
         }
 
         const accessToken = await jwt.signAccessToken(payload);
-        const newRefreshToken = await jwt.signRefreshToken(userId.toString()); 
+        const newRefreshToken = await jwt.signRefreshToken(userId.toString());
+
+        Cookie.send(newRefreshToken, res);
 
         res.json({
-            accessToken,
-            refreshToken: newRefreshToken
+            accessToken
         });
 
     } catch (error) {
@@ -142,7 +146,7 @@ const refreshToken = async (req, res, next) => {
 
 const signout = async (req, res, next) => {
     try {
-        const {refreshToken} = req.body;
+        const {refreshToken} = req.cookies;
         if(!refreshToken){
             const badRequestError = new Error('Bad Request');
             res.status(400);
@@ -158,6 +162,7 @@ const signout = async (req, res, next) => {
             }
             console.log(value);
             res.status(200);
+            res.clearCookie('refreshToken');
             res.json({
                 message: 'Logged out successfuly!'
             })
@@ -173,5 +178,5 @@ module.exports = {
     signup,
     signin,
     refreshToken,
-    signout
+    signout,
 }

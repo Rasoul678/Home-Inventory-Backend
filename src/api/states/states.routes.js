@@ -8,8 +8,7 @@ router.get('/', middlewares.authenticateJWT, async (req, res, next) => {
   try {
     const states = await State.query()
       .finder.deletedAt(false)
-      .withGraphFetched('addresses')
-      .withGraphFetched('country');
+      .withGraphFetched('[addresses, country]');
     res.json(states);
   } catch (error) {
     next(error);

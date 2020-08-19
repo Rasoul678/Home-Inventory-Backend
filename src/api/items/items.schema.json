@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "title": "Item",
+    "description": "The Item",
+    "required": [
+        "name",
+        "user_id",
+        "company_id",
+        "size_id",
+        "item_type_id"
+    ],
+    "properties": {
+        "id": {
+            "$id": "#/properties/id",
+            "type": "integer",
+            "title": "The database Id of the item"
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name of the item"
+        },
+        "description": {
+            "$id": "#/properties/description",
+            "type": "string",
+            "title": "The description of the item"
+        },
+        "sparks_joy": {
+            "$id": "#/properties/sparks_joy",
+            "type": "boolean",
+            "title": "The sparks_joy"
+        },
+        "sku": {
+            "$id": "#/properties/sku",
+            "type": "string",
+            "title": "The sku"
+        },
+        "user_id": {
+            "$id": "#/properties/user_id",
+            "type": "integer",
+            "title": "The database Id of the user"
+        },
+        "company_id": {
+            "$id": "#/properties/company_id",
+            "type": "integer",
+            "title": "The database Id of the company"
+        },
+        "item_type_id": {
+            "$id": "#/properties/item_type_id",
+            "type": "integer",
+            "title": "The database Id of the item_type"
+        },
+        "size_id": {
+            "$id": "#/properties/size_id",
+            "type": "integer",
+            "title": "The database Id of the size"
+        },
+        "created_at": {
+            "$id": "#/properties/created_at",
+            "type": "string",
+            "title": "The created_at schema"
+        },
+        "updated_at": {
+            "$id": "#/properties/updated_at",
+            "type": "string",
+            "title": "The updated_at schema"
+        },
+        "deleted_at": {
+            "$id": "#/properties/deleted_at",
+            "type": "boolean",
+            "title": "The deleted_at schema"
+        }
+    },
+    "additionalProperties": false
+}

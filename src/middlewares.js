@@ -15,11 +15,9 @@ const authenticateJWT = async (req, res, next) => {
         await jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (error, user) => {
             if (error) {
                 if(error.name === 'TokenExpiredError'){
-                    res.status(401);
                     next(error);
                 }else{
                     const unauthorizedError = new Error('Token verification failed.');
-                    res.status(403);
                     next(unauthorizedError);
                 }
             }
@@ -29,7 +27,6 @@ const authenticateJWT = async (req, res, next) => {
             next();
         });
     } else {
-        res.status(401);
         const error = new Error('You are not authorized');
         next(error);
     }
@@ -38,6 +35,7 @@ const authenticateJWT = async (req, res, next) => {
 const errorTypes = {
     ValidationError: 422,
     UniqueViolationError: 409,
+    TokenExpiredError: 401
 }
 
 const errorMessages = {
@@ -47,7 +45,6 @@ const errorMessages = {
 function errorHandler(error, req, res, next){
     const statusCode = res.statusCode === 200 ? (errorTypes[error.name] || 500) : res.statusCode;
     res.status(statusCode);
-
     res.json({
         status: statusCode,
         message: errorMessages[error.name] || error.message,

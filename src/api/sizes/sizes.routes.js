@@ -25,6 +25,8 @@ router.post('/', middlewares.authenticateJWT, async (req, res, next) => {
     try {
         req.body.name = req.body.name.toString().toLowerCase().trim();
 
+        console.log(req.body);
+
         const newSize = await Size.query().insert(req.body);
         res.json(newSize);
     } catch (error) {
