@@ -13,6 +13,7 @@ class Item extends BaseModel {
       const Company = require('../companies/companies.model');
       const Size = require('../sizes/sizes.model');
       const ItemImage = require('../itemImages/itemImages.model');
+      const ItemInfo = require('../itemInfos/itemInfos.model');
 
       return {
         user: {
@@ -57,6 +58,15 @@ class Item extends BaseModel {
             join: {
               from: 'item.id',
               to: 'item_image.item_id'
+            }
+          },
+
+          products: {
+            relation: BaseModel.HasManyRelation,
+            modelClass: ItemInfo,
+            join: {
+              from: 'item.id',
+              to: 'item_info.item_id'
             }
           },
       }

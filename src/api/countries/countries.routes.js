@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', middlewares.authenticateJWT, async (req, res, next) => {
   try {
-    const countries = await Country.query().finder.deletedAt(false).withGraphFetched('states');
+    const countries = await Country.query().finder.deletedAt(false).withGraphFetched('states.addresses');
     res.json(countries);
   } catch (error) {
     next(error);

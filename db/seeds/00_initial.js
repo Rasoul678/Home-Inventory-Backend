@@ -2,6 +2,9 @@ const Knex = require("knex");
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const countries = require('../../src/constants/countries');
+const states = require('../../src/constants/states');
+const shapes = require('../../src/constants/shapes');
+const item_types = require('../../src/constants/item_types');
 const orderedTableNames = require('../../src/constants/orderedTableNames');
 const tableNames = require('../../src/constants/tableNames');
 
@@ -31,26 +34,12 @@ const password = crypto.randomBytes(15).toString('hex');
     console.log(createdUser);
   }
 
-  const states = [
-    {name: 'Colorado', code: 'CO', 'country_id': 1},
-    {name: 'Arizona', code: 'AZ', 'country_id': 1},
-    {name: 'Texas', code: 'TX', 'country_id': 1},
-  ];
-
-  const shapes = [
-    {name: 'triangle', description: 'triangle'},
-    {name: 'square', description: 'square'},
-    {name: 'pentagon', description: 'pentagon'},
-    {name: 'circle', description: 'circle'},
-    {name: 'oval', description: 'oval'},
-    {name: 'cube', description: 'cube'},
-    {name: 'cylinder', description: 'cylinder'},
-  ]
-
   await knex(tableNames.country).insert(countries);
 
   await knex(tableNames.state).insert(states);
 
   await knex(tableNames.shape).insert(shapes);
+
+  await knex(tableNames.item_type).insert(item_types);
 
 };

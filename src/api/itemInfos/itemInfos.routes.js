@@ -1,15 +1,15 @@
 const express = require('express');
-const Item= require('./items.model');
+const ItemInfo = require('./itemInfos.model');
 const middlewares = require('../../middlewares');
 
 const router = express.Router();
 
 router.get('/', middlewares.authenticateJWT, async (req, res, next) => {
     try {
-        const items = await Item.query().finder.deletedAt(false)
-            .withGraphFetched('[user, company, products, item_type, item_images, size, size.shape, company.address]');
+        const itemInfoss = await ItemInfo.query().finder.deletedAt(false)
+            .withGraphFetched('[user, retailer, item, location]');
             
-        res.json(items);
+        res.json(itemInfoss);
     } catch (error) {
         next(error);
     }
@@ -25,13 +25,8 @@ router.post('/', middlewares.authenticateJWT, async (req, res, next) => {
     }
 
     try {
-        ['name', 'description'].forEach((prop) => {
-            if(req.body[prop]){
-                req.body[prop] = req.body[prop].toString().toLowerCase().trim();
-            }
-        });
-        const newItem= await Item.query().insert(req.body);
-        res.json(newItem);
+        const newItemInfo= await ItemInfo.query().insert(req.body);
+        res.json(newItemInfo);
     } catch (error) {
         next(error);
     }
@@ -48,11 +43,8 @@ router.get('/:id', middlewares.authenticateJWT, async (req, res, next) => {
     }
 
     try {
-        const item = await Item.query().finder.id(id).first()
-        .withGraphFetched(`[
-            user, company, products.[user, retailer, location], item_type, item_images, size, size.shape,
-            company.[address, address.[state, state.country]]
-        ]`);
+        const itemInfo = await ItemInfo.query().finder.id(id).first()
+        .withGraphFetched('[user, retailer, item, location]');
         res.json(item);
     } catch (error) {
         next(error);
@@ -70,8 +62,8 @@ router.delete('/:id', middlewares.authenticateJWT, async (req, res, next) => {
     }
 
     try {
-        await Item.query().findById(id).delete();
-        res.json("Item deleted.");
+        await ItemInfo.query().findById(id).delete();
+        res.json("Item info deleted.");
     } catch (error) {
         next(error);
     }
